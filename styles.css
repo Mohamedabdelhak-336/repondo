@@ -369,3 +369,421 @@ header.hero .bg-light,
 /* ============================================================================
    FIN DU FICHIER
    ============================================================================ */
+   /* Ajoute ceci à styles.css (ou importe en fichier séparé) */
+
+/* Layout */
+.process-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .process-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Carte étape */
+.step-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #fbfbfd);
+  box-shadow: 0 6px 18px rgba(28, 34, 62, 0.06);
+  border: 1px solid rgba(39, 45, 66, 0.04);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(28, 34, 62, 0.12);
+}
+
+/* Icone */
+.step-icon {
+  flex: 0 0 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #5b8cff 0%, #7bd389 100%);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(91, 140, 255, 0.18);
+}
+
+/* Texte */
+.step-body h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+.step-body p {
+  margin: 0;
+  color: #596074;
+  font-size: 0.95rem;
+}
+
+/* Fade-up animation (compatible avec ton IntersectionObserver) */
+.fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 420ms cubic-bezier(.2,.9,.2,1), transform 420ms cubic-bezier(.2,.9,.2,1);
+  will-change: opacity, transform;
+}
+
+/* Quand JS ajoute .animate, l'élément entre en animation */
+.fade-up.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Support pour délai par élément via variable CSS */
+.fade-up[data-stagger] {
+  transition-delay: calc(var(--stagger, 0s));
+}
+/* contact-styles.css
+   Styles complets pour la section #contact et pour le modal #contactModal
+   -> Copier ce fichier et l'inclure APRÈS bootstrap et ton styles.css principal.
+*/
+
+/* =========================
+   Variables et couleurs
+   ========================= */
+:root{
+  --bg: #ffffff;
+  --muted: #6b7280;
+  --text: #0f172a;
+  --accent: #2b8cff;
+  --accent-2: #28a745;
+  --card-border: rgba(15,23,42,0.06);
+  --modal-radius: 12px;
+  --modal-shadow: 0 18px 40px rgba(11,22,55,0.18);
+  --transition-fast: 180ms cubic-bezier(.2,.9,.2,1);
+  --transition-medium: 320ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* =========================
+   Form Section: #contact
+   ========================= */
+#contact {
+  background: transparent; /* conserve le bg du site */
+  color: var(--text);
+}
+
+#contact .container {
+  max-width: 960px;
+}
+
+/* Form card feel */
+#contact form {
+  background: linear-gradient(180deg, #fff, #fbfbfd);
+  border: 1px solid var(--card-border);
+  padding: 1.15rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(11,22,55,0.04);
+}
+
+/* Labels and inputs */
+#contact label.form-label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+#contact .form-control {
+  border-radius: 8px;
+  border: 1px solid rgba(15,23,42,0.06);
+  padding: 0.7rem 0.9rem;
+  height: auto;
+  background: #fff;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+  box-shadow: none;
+}
+
+/* Textarea */
+#contact textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Focus states for accessibility */
+#contact .form-control:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 8px 18px rgba(43,140,255,0.08);
+}
+
+/* Submit button */
+#contact .btn-primary {
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 10px 26px rgba(43,140,255,0.08);
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+#contact .btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(.98);
+}
+
+/* Small helper text / validation */
+#contact .form-text {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Responsive spacing */
+@media (max-width: 576px) {
+  #contact form {
+    padding: 1rem;
+  }
+}
+
+/* =========================
+   Modal Contact: #contactModal
+   ========================= */
+/* Backdrop style (blur + darken) */
+.modal-backdrop.show {
+  background-color: rgba(10,14,30,0.45);
+  backdrop-filter: blur(3px);
+}
+
+/* Modal content box */
+#contactModal .modal-content {
+  background: linear-gradient(180deg, var(--bg), #fbfbfd);
+  border-radius: var(--modal-radius);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--modal-shadow);
+  overflow: hidden;
+  padding: 0;
+  transition: transform var(--transition-medium), opacity 240ms ease;
+  will-change: transform, opacity;
+}
+
+/* Dialog size */
+#contactModal .modal-dialog {
+  max-width: 420px;
+  margin: 1.75rem auto;
+}
+@media (max-width: 420px) {
+  #contactModal .modal-dialog {
+    margin: 0.6rem;
+    max-width: calc(100% - 1rem);
+  }
+}
+
+/* Pop-in animation */
+@keyframes modal-pop-in {
+  0% { transform: translateY(-14px) scale(.98); opacity: 0; }
+  60% { transform: translateY(6px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+#contactModal.show .modal-dialog,
+.modal.show #contactModal .modal-dialog {
+  animation: modal-pop-in 360ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Header */
+#contactModal .modal-header {
+  padding: 0.85rem 1rem;
+  border-bottom: none;
+  align-items: center;
+}
+#contactModal .modal-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Close button: keep Bootstrap svg background, don't overwrite background-image */
+#contactModal .btn-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border: 1px solid rgba(16,24,40,0.06);
+  background-color: #fff;           /* use background-color to keep background-image */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
+  display: grid;
+  place-items: center;
+  transition: transform 140ms ease, background 140ms ease;
+}
+#contactModal .btn-close:hover,
+#contactModal .btn-close:focus {
+  transform: scale(1.04);
+  background-color: #fbfbff;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+}
+
+/* Fallback: display an explicit "✕" if background-image is not available */
+#contactModal .btn-close::after {
+  content: "✕";
+  font-size: 16px;
+  color: var(--accent);
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(-1px);
+  pointer-events: none;
+}
+
+/* Body */
+#contactModal .modal-body {
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* Icon box on left */
+#contactModal .d-flex.align-items-start {
+  gap: 0.75rem;
+}
+#contactModal .d-flex .me-3 {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(91,140,255,0.12), rgba(123,211,137,0.06));
+  font-size: 1.2rem;
+  color: #0b5ed7;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+}
+
+/* small title + value formatting */
+#contactModal .small {
+  font-size: 0.72rem;
+  color: #9ca3af;
+}
+#contactModal .fw-semibold {
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 0.18rem;
+  word-break: break-all;
+}
+
+/* Buttons inside modal */
+#contactModal .modal-body .btn {
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+/* WhatsApp primary */
+#contactModal #contact-wa-btn {
+  background: linear-gradient(180deg, var(--accent-2), #218838);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(40,167,69,0.12);
+}
+#contactModal #contact-wa-btn:hover { transform: translateY(-2px); filter: brightness(.98); }
+
+/* Email primary */
+#contactModal #contact-email-btn {
+  background: linear-gradient(180deg, var(--accent), #1e6fe8);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(43,140,255,0.12);
+}
+#contactModal #contact-email-btn:hover { transform: translateY(-2px); filter: brightness(.98); }
+
+/* Copy buttons */
+#contactModal .btn-outline-secondary {
+  background: #fff;
+  border: 1px solid rgba(15,23,42,0.08);
+  color: #374151;
+}
+#contactModal .btn-outline-secondary:hover {
+  background: #f5f7fb;
+  transform: translateY(-1px);
+}
+
+/* Divider */
+#contactModal hr {
+  margin: 0.55rem 0 0.85rem;
+  border-color: rgba(15,23,42,0.06);
+}
+
+/* Copy feedback small text */
+#contactModal .copy-feedback {
+  font-size: 0.78rem;
+  color: #10b981;
+  margin-left: 0.5rem;
+  display: none;
+}
+#contactModal .copied + .copy-feedback {
+  display: inline-block;
+}
+
+/* Accessibility focus */
+#contactModal .btn:focus, #contactModal .btn-close:focus {
+  outline: 3px solid rgba(43,140,255,0.12);
+  outline-offset: 2px;
+  box-shadow: 0 6px 18px rgba(43,140,255,0.08);
+}
+
+/* Inner elements appear smoothly when modal opens */
+#contactModal .modal-body > * {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 320ms ease, transform 320ms var(--transition-medium);
+}
+#contactModal.show .modal-body > * {
+  opacity: 1;
+  transform: none;
+  transition-delay: 80ms;
+}
+
+/* =========================
+   Animation utilities (fade-up etc.)
+   Compatible with IntersectionObserver in main.js
+   ========================= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 420ms cubic-bezier(.2,.9,.2,1), transform 420ms cubic-bezier(.2,.9,.2,1);
+  will-change: opacity, transform;
+}
+.fade-up.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button animation helper */
+.btn-animate { transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+.btn-animate:hover { transform: translateY(-3px); }
+
+/* Stagger support: use CSS variable --stagger (appliqué via JS) */
+.fade-up[data-stagger] { transition-delay: var(--stagger, 0s); }
+
+/* =========================
+   Misc utilities
+   ========================= */
+.text-muted-small { color: #9aa3b2; font-size: 0.85rem; }
+
+/* Floating whatsapp fab small tweak if present */
+.whatsapp-fab {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1100;
+  border-radius: 50%;
+  box-shadow: 0 12px 30px rgba(16,24,40,0.15);
+}
+
+/* =========================
+   End of file
+   ========================= */
