@@ -1,0 +1,371 @@
+/* ============================================================================
+   Styles complets pour Répondo — Hero + Services + Animations
+   ============================================================================ */
+
+/* Reset / body */
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  padding-top: 4.5rem;
+  background: #ffffff;
+}
+
+/* ============================================================================
+   HERO SECTION — AVEC BACKGROUND GRADIENT CONSERVÉ + LOTTIE
+   ============================================================================ */
+
+.hero {
+  background: linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Logo navbar */
+.navbar-brand img { height: 40px; width: auto; }
+@media (max-width: 576px) {
+  .navbar-brand img { height: 34px; }
+}
+
+/* Logo responsive */
+.logo {
+  width: auto;
+  height: 48px;
+  max-height: 48px;
+  max-width: 100%;
+  display: block;
+}
+@media (max-width: 576px) {
+  .logo { height: 36px; }
+}
+
+/* Header brand background */
+.header .brand {
+  width: 180px;
+  height: 48px;
+  background-image: url('repondo-logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Hero typography */
+.hero .hero-content h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.06;
+  margin-bottom: .6rem;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+}
+
+.hero .lead {
+  color: #334155;
+  opacity: 0.95;
+  margin-bottom: 1rem;
+}
+
+/* ============================================================================
+   HERO LOTTIE ANIMATION — Positionné à côté du texte (col-lg-7)
+   ============================================================================ */
+
+/* 1) Assure que le hero garde son background (gradient) — NE PAS le rendre transparent */
+header.hero {
+  position: relative;
+  overflow: hidden;
+  /* background: linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);  <- garder par défaut */
+}
+
+/* 2) Container au-dessus de l'animation */
+header.hero .container {
+  position: relative;
+  z-index: 3; /* contenu (texte, boutons) au-dessus de la Lottie */
+}
+
+/* 3) Lottie container — positionné à côté du texte (col-lg-7) */
+.hero-lottie-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 320px;
+  margin-top: 20px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.16;
+  transition: opacity .3s ease;
+  display: block;
+}
+
+.hero-lottie-container lottie-player {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Responsive : réduire sur écrans plus petits */
+@media (max-width: 1200px) {
+  .hero-lottie-container {
+    max-width: 340px;
+    height: 280px;
+    opacity: 0.14;
+  }
+}
+
+/* Mobile : masquer l'animation pour perf/lisibilité */
+@media (max-width: 992px) {
+  .hero-lottie-container { display: none; }
+}
+
+/* ============================================================================
+   HERO BUTTONS & CARDS — Transparentes pour laisser Lottie visible
+   ============================================================================ */
+
+/* Boutons hero */
+.hero .actions {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero .actions .btn {
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+  will-change: transform, opacity;
+  border-radius: .6rem;
+  padding-left: 1.05rem;
+  padding-right: 1.05rem;
+}
+
+.hero .actions .btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(15,23,42,.08);
+}
+
+.hero .actions .btn:active { transform: translateY(-2px); }
+
+/* Carte des boutons — transparente */
+.button-card {
+  display: inline-block;
+  background: transparent !important;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none !important;
+  border: none !important;
+  margin-top: 16px;
+}
+
+@media (max-width: 576px) {
+  .button-card {
+    display: block;
+    padding: 8px 12px;
+    margin-top: 12px;
+  }
+}
+
+/* Rendre les cartes du hero transparentes pour voir la Lottie */
+header.hero .card,
+header.hero .card-body,
+header.hero .jumbotron,
+header.hero .bg-white,
+header.hero .bg-light,
+.services-card,
+.services-card .card,
+.services-card .card-body,
+.services-card .card-body .card-list {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Mais garder les icônes colorées au-dessus */
+.services-card .service-icon,
+.card-list .service-icon,
+.button-card .service-icon {
+  z-index: 4 !important;
+  position: relative;
+}
+
+/* Petits éléments */
+.card-list li { margin-bottom: .5rem; }
+
+/* ============================================================================
+   ICONES COLORÉES — SVG visibles avec couleurs dégradées
+   ============================================================================ */
+
+.services-card .service-icon,
+.card-list .service-icon {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex: 0 0 52px;
+  margin-right: 14px;
+  z-index: 4 !important;
+  opacity: 1 !important;
+  box-shadow: 0 8px 20px rgba(11,61,145,0.08);
+  background-clip: padding-box;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.services-card .service-icon svg,
+.card-list .service-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Dégradés d'accent pour icônes */
+.service-icon.accent-1 { background: linear-gradient(135deg,#00A86B 0%, #26C6A0 100%); }
+.service-icon.accent-2 { background: linear-gradient(135deg,#0B3D91 0%, #3B82F6 100%); }
+.service-icon.accent-3 { background: linear-gradient(135deg,#FF6B6B 0%, #FF9A8B 100%); }
+.service-icon.accent-4 { background: linear-gradient(135deg,#8A2BE2 0%, #6C5CE7 100%); }
+.service-icon.accent-5 { background: linear-gradient(135deg,#FFB020 0%, #FF7A59 100%); }
+.service-icon.accent-6 { background: linear-gradient(135deg,#06B6D4 0%, #3DD6E8 100%); }
+.service-icon.accent-7 { background: linear-gradient(135deg,#7CFC00 0%, #32CD32 100%); }
+.service-icon.accent-8 { background: linear-gradient(135deg,#6B7280 0%, #9CA3AF 100%); }
+
+/* ============================================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================================ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up { opacity: 0; transform: translateY(18px); }
+.fade-up.animate { animation: fadeUp .64s cubic-bezier(.2,.9,.3,1) forwards; }
+
+/* Stagger delays */
+.stagger-1 { animation-delay: .08s; }
+.stagger-2 { animation-delay: .16s; }
+.stagger-3 { animation-delay: .24s; }
+.stagger-4 { animation-delay: .32s; }
+.stagger-5 { animation-delay: .40s; }
+.stagger-6 { animation-delay: .48s; }
+.stagger-7 { animation-delay: .56s; }
+.stagger-8 { animation-delay: .64s; }
+
+.fade-up.stagger-1.animate { animation-delay: .12s; }
+.fade-up.stagger-2.animate { animation-delay: .28s; }
+.fade-up.stagger-3.animate { animation-delay: .44s; }
+
+/* Animation pour boutons */
+.btn-animate { opacity: 0; transform: translateY(10px) scale(.995); }
+.btn-animate.animate { animation: fadeUp .56s cubic-bezier(.2,.9,.3,1) forwards; }
+
+/* ============================================================================
+   BOUTONS — Styles primaire et outline
+   ============================================================================ */
+
+.btn-primary {
+  background-image: linear-gradient(180deg,#1e73ff 0%, #1266e0 100%);
+  border: none;
+  box-shadow: 0 6px 18px rgba(30,115,255,.12);
+  color: #fff;
+}
+
+.btn-outline-dark {
+  border-color: rgba(15,23,42,.12);
+  color: #0f172a;
+}
+
+/* ============================================================================
+   SECTION SERVICES — Grid + Cards animées
+   ============================================================================ */
+
+.services-grid { margin-top: 8px; }
+
+.service-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.94));
+  box-shadow: 0 8px 28px rgba(15,23,42,0.04);
+  border: 1px solid rgba(15,23,42,0.04);
+  transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s ease;
+}
+
+.service-card.transparent {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.service-left { flex: 0 0 64px; display: flex; align-items: center; justify-content: center; }
+.service-right { flex: 1 1 auto; }
+
+.service-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(11,61,145,0.06);
+}
+
+.service-title { margin: 0 0 6px; font-size: 1.05rem; font-weight: 600; color: #08142a; }
+.service-desc { margin: 0; color: #475569; font-size: .96rem; line-height: 1.38; }
+
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(15,23,42,0.08); }
+
+@media (max-width: 767.98px) {
+  .service-card { padding: 12px; }
+  .service-left { flex: 0 0 52px; }
+  .service-icon { width: 44px; height: 44px; border-radius: 10px; }
+}
+
+/* ============================================================================
+   FLOATING WHATSAPP BUTTON
+   ============================================================================ */
+
+.whatsapp-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+}
+
+/* ============================================================================
+   RESPONSIVE SPACING
+   ============================================================================ */
+
+@media (min-width: 992px) {
+  .hero { padding: 5.5rem 0; }
+}
+
+@media (max-width: 576px) {
+  .hero { padding: 3rem 0; }
+  .hero .hero-content h1 { font-size: 1.5rem; }
+  .hero .actions { gap: .4rem; }
+  .btn-animate { height: auto; }
+}
+
+/* ============================================================================
+   ACCESSIBILITY — Respect prefers-reduced-motion
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-lottie-container { display: none !important; }
+  .fade-up { opacity: 1; transform: none; }
+  .fade-up.animate { animation: none; }
+  .service-card:hover { transform: none; }
+}
+
+/* Fallback si JS ne s'exécute pas */
+.no-js .fade-up { opacity: 1; transform: none; }
+
+/* ============================================================================
+   FIN DU FICHIER
+   ============================================================================ */

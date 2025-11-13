@@ -1,0 +1,33 @@
+/* lottie.css - contenu mis à jour pour s'assurer que Lottie s'affiche correctement */
+
+/* container de lottie (derrière le contenu) */
+.lottie-bg {
+  position: absolute;
+  inset: 0;                 /* couvre tout le hero */
+  z-index: 0;               /* derrière le contenu */
+  pointer-events: none;     /* clics passent au contenu */
+  opacity: 0.22;            /* légèrement plus visible pour debug - ajuste à 0.08 en prod */
+  display: block;
+}
+
+/* Assurer que header.hero est positionné pour que .lottie-bg soit relatif à lui */
+header.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Forcer le container du hero au-dessus de l'animation */
+header.hero .container {
+  position: relative;
+  z-index: 1; /* IMPORTANT : place le contenu au dessus de .lottie-bg */
+}
+
+/* Ajustements mobile : réduire visibilité et désactiver heavy animation */
+@media (max-width: 768px) {
+  .lottie-bg { opacity: 0.12; }
+}
+
+/* Respecter prefers-reduced-motion (ne pas animer) */
+@media (prefers-reduced-motion: reduce) {
+  .lottie-bg { display: none; }
+}
